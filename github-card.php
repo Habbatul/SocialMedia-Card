@@ -1,46 +1,15 @@
 <?php 
     header("Content-type: image/svg+xml"); 
 
-  //set token dari github
-  $token = "rahasia";
-  
-  //url api github
-  $url = "https://api.github.com/user";
-  
-  //header request
-  $headers = array(
-      "Accept: application/vnd.github+json",
-      "Authorization: Bearer $token",
-      "User-Agent: My-App" //tambah user-agent header
-  );
-  
-  //inisialisasi curl
-  $ch = curl_init();
-  
-  // Set URL dan opsi curl
-  curl_setopt($ch, CURLOPT_URL, $url);
-  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-  
-  //jalankan curl dan simpan response nya
-  $response = curl_exec($ch);
+    // Baca isi file JSON
+    $jsonData = file_get_contents('data.json');
 
-  //Decode karena bentuknya JSON (yang diterima dari respons API GitHub)
-  $data = json_decode($response, true);
-  $followers="";
-  $repos="";
-  //cek dekoding berhasil ora
-  if ($data === null) {
-      $followers = "";
-      $repos="";
-  } else {
-      $followers = $data['followers'];
-      $repos=$data['public_repos'];
-  }
-  
-
-  //tutup curl
-  curl_close($ch);
+    // Decode JSON menjadi array asosiatif
+    $data = json_decode($jsonData, true);
+    // Mengakses data GitHub
+    $githubData = $data['github'];
+    $githubFollowers = $githubData['followers'];
+    $githubRepos = $githubData['repos'];
   
 ?>
 
@@ -50,11 +19,11 @@
 </g>
 
         <text x="705" y="225" font-family="'IBM Plex Mono', monospace" font-size="35" fill="white" text-anchor="end">
-            <tspan font-weight="bold">Follower:</tspan><tspan font-weight="bold"><?= $followers; ?></tspan>
+            <tspan font-weight="bold">Follower:</tspan><tspan font-weight="bold"><?= $githubFollowers; ?></tspan>
         </text>
 
         <text x="500" y="245" font-family="'IBM Plex Mono', monospace" font-size="17" fill="white" text-anchor="end">
-        <tspan x="705" dy="1.2em">I have <?= $repos; ?> total projects.</tspan><tspan x="705" dy="1.2em">Let’s see my own project</tspan><tspan x="705" dy="1.2em">Klick This Section to</tspan><tspan x="705" dy="1.2em">go to my Github</tspan>
+        <tspan x="705" dy="1.2em">I have <?= $githubData['repos']; ?> total projects.</tspan><tspan x="705" dy="1.2em">Let’s see my own project</tspan><tspan x="705" dy="1.2em">Klick This Section to</tspan><tspan x="705" dy="1.2em">go to my Github</tspan>
         </text>
 
 
