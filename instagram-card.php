@@ -1,4 +1,17 @@
-<?php header("Content-type: image/svg+xml"); ?>
+<?php header("Content-type: image/svg+xml"); 
+
+// Baca isi file JSON
+$jsonData = file_get_contents('data.json');
+
+// Decode JSON menjadi array asosiatif
+$data = json_decode($jsonData, true);
+
+// Mengakses data Instagram
+$instagramData = $data['instagram'];
+$instagramFollowers = $instagramData['followers'];
+$instagramPosts = $instagramData['posts'];
+
+?>
 
 <svg width="791" height="418" viewBox="0 0 791 418" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g filter="url(#filter0_di_750_592)">
@@ -7,11 +20,11 @@
 
 
         <text x="705" y="225" font-family="'IBM Plex Mono', monospace" font-size="35" fill="white" text-anchor="end">
-            <tspan font-weight="bold">Follower:</tspan><tspan font-weight="bold">960</tspan>
+            <tspan font-weight="bold">Follower:</tspan><tspan font-weight="bold"><?= $instagramFollowers; ?></tspan>
         </text>
 
         <text x="500" y="245" font-family="'IBM Plex Mono', monospace" font-size="17" fill="white" text-anchor="end">
-            <tspan x="705" dy="1.2em">Let’s see my own artwork</tspan><tspan x="705" dy="1.2em">Klick This Section to</tspan><tspan x="705" dy="1.2em">go to my Instagram</tspan>
+        <tspan x="705" dy="1.2em">I have <?= $instagramPosts; ?> total content</tspan><tspan x="705" dy="1.2em">Let’s see my own artwork</tspan><tspan x="705" dy="1.2em">Klick This Section to</tspan><tspan x="705" dy="1.2em">go to my Instagram</tspan>
         </text>
 
 
