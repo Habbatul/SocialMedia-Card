@@ -1,0 +1,81 @@
+Untuk mengambil data dari Github memakai REST API Github
+
+//   //set token dari github
+//   $token = "rahasia";
+  
+//   //url api github
+//   $url = "https://api.github.com/user";
+  
+//   //header request
+//   $headers = array(
+//       "Accept: application/vnd.github+json",
+//       "Authorization: Bearer $token",
+//       "User-Agent: My-App" //tambah user-agent header
+//   );
+  
+//   //inisialisasi curl
+//   $ch = curl_init();
+  
+//   // Set URL dan opsi curl
+//   curl_setopt($ch, CURLOPT_URL, $url);
+//   curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+//   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  
+//   //jalankan curl dan simpan response nya
+//   $response = curl_exec($ch);
+
+//   //Decode karena bentuknya JSON (yang diterima dari respons API GitHub)
+//   $data = json_decode($response, true);
+//   $followers="";
+//   $repos="";
+//   //cek dekoding berhasil ora
+//   if ($data === null) {
+//       $followers = "";
+//       $repos="";
+//   } else {
+//       $followers = $data['followers'];
+//       $repos=$data['public_repos'];
+//   }
+  
+
+//   //tutup curl
+//   curl_close($ch);
+
+
+
+Untuk mengambil data dari Instagram memakai Scrapping
+
+// require 'vendor/autoload.php'; // Load Composer's autoloader
+
+// use GuzzleHttp\Client;
+
+// function getHeadContent($url) {
+//     $client = new Client();
+//     $response = $client->request('GET', $url);
+
+//     $html = $response->getBody()->getContents();
+
+//     // Temukan posisi awal dan akhir dari tag head
+//     $start = strpos($html, '<head>');
+//     $end = strpos($html, '</head>', $start);
+
+//     // Ambil bagian head dari HTML
+//     $headContent = substr($html, $start, $end - $start + strlen('</head>'));
+
+//     // Temukan tag meta dengan property="og:description"
+//     $metaTagPattern = '/(\d+) Followers,.*?(\d+) Posts/i';
+//     preg_match($metaTagPattern, $headContent, $matches);
+
+//     // Jika ditemukan, ambil angka Followers dan Posts
+//     if (!empty($matches)) {
+//         $followers = $matches[1];
+//         $posts = $matches[2];
+//         return array('followers' => $followers, 'posts' => $posts);
+//     } else {
+//         return null;
+//     }
+// }
+
+// $username = 'hq.han'; // Ganti dengan nama pengguna Instagram yang sesuai
+// $url = 'https://www.instagram.com/' . $username . '/';
+// $metaContent = getHeadContent($url);
